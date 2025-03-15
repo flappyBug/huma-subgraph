@@ -3,6 +3,9 @@
     "TrancheVault": {
       "address": "0xf26A071833032Ce57769fdf530E81A28f15671df",
       "startBlock": 24781411
+    },
+    "ReceivableBackedCreditLine": {
+      "address": "0xE265E07F9d18Df940A75CfFfEA51211F4f0C46cC"
     }
   }
 }

@@ -90,3 +90,64 @@ dataSources:
         - event: YieldReinvested(indexed address,uint256)
           handler: handleYieldReinvested
       file: ./src/tranche-vault.ts
+  - kind: ethereum
+    name: ReceivableBackedCreditLine
+    network: celo
+    source:
+      address: "0xE265E07F9d18Df940A75CfFfEA51211F4f0C46cC"
+      abi: ReceivableBackedCreditLine
+      startBlock: 24781414
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - ReceivableBackedCreditLineAdminChanged
+        - ReceivableBackedCreditLineBeaconUpgraded
+        - BillRefreshed
+        - CreditClosedAfterPayOff
+        - DrawdownMade
+        - DrawdownMadeWithReceivable
+        - ReceivableBackedCreditLineInitialized
+        - PaymentMade
+        - PaymentMadeWithReceivable
+        - ReceivableBackedCreditLinePoolConfigCacheUpdated
+        - ReceivableBackedCreditLinePoolConfigChanged
+        - PrincipalPaymentMade
+        - PrincipalPaymentMadeWithReceivable
+        - ReceivableBackedCreditLineUpgraded
+      abis:
+        - name: ReceivableBackedCreditLine
+          file: ./abis/ReceivableBackedCreditLine.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: BillRefreshed(indexed bytes32,uint256,uint256,uint256)
+          handler: handleBillRefreshed
+        - event: CreditClosedAfterPayOff(indexed bytes32,address)
+          handler: handleCreditClosedAfterPayOff
+        - event: DrawdownMade(indexed address,uint256,uint256)
+          handler: handleDrawdownMade
+        - event: DrawdownMadeWithReceivable(indexed address,indexed uint256,uint256,address)
+          handler: handleDrawdownMadeWithReceivable
+        - event: Initialized(uint8)
+          handler: handleInitialized
+        - event: PaymentMade(indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address)
+          handler: handlePaymentMade
+        - event: PaymentMadeWithReceivable(indexed address,indexed uint256,uint256,address)
+          handler: handlePaymentMadeWithReceivable
+        - event: PoolConfigCacheUpdated(indexed address)
+          handler: handlePoolConfigCacheUpdated
+        - event: PoolConfigChanged(indexed address,indexed address)
+          handler: handlePoolConfigChanged
+        - event: PrincipalPaymentMade(indexed address,indexed
+            address,uint256,uint256,uint256,uint256,uint256,uint256,address)
+          handler: handlePrincipalPaymentMade
+        - event: PrincipalPaymentMadeWithReceivable(indexed address,indexed uint256,uint256,address)
+          handler: handlePrincipalPaymentMadeWithReceivable
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/receivable-backed-credit-line.ts

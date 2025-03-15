@@ -214,3 +214,148 @@ type YieldReinvested @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+type ReceivableBackedCreditLineAdminChanged @entity(immutable: true) {
+  id: Bytes!
+  previousAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReceivableBackedCreditLineBeaconUpgraded @entity(immutable: true) {
+  id: Bytes!
+  beacon: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BillRefreshed @entity(immutable: true) {
+  id: Bytes!
+  creditHash: Bytes! # bytes32
+  newDueDate: BigInt! # uint256
+  nextDue: BigInt! # uint256
+  totalPastDue: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CreditClosedAfterPayOff @entity(immutable: true) {
+  id: Bytes!
+  creditHash: Bytes! # bytes32
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DrawdownMade @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  borrowAmount: BigInt! # uint256
+  netAmountToBorrower: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type DrawdownMadeWithReceivable @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  receivableId: BigInt! # uint256
+  amount: BigInt! # uint256
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReceivableBackedCreditLineInitialized @entity(immutable: true) {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PaymentMade @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  payer: Bytes! # address
+  amount: BigInt! # uint256
+  yieldDuePaid: BigInt! # uint256
+  principalDuePaid: BigInt! # uint256
+  unbilledPrincipalPaid: BigInt! # uint256
+  yieldPastDuePaid: BigInt! # uint256
+  lateFeePaid: BigInt! # uint256
+  principalPastDuePaid: BigInt! # uint256
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PaymentMadeWithReceivable @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  receivableId: BigInt! # uint256
+  amount: BigInt! # uint256
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReceivableBackedCreditLinePoolConfigCacheUpdated @entity(immutable: true) {
+  id: Bytes!
+  poolConfig: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReceivableBackedCreditLinePoolConfigChanged @entity(immutable: true) {
+  id: Bytes!
+  newPoolConfig: Bytes! # address
+  oldPoolConfig: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PrincipalPaymentMade @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  payer: Bytes! # address
+  amount: BigInt! # uint256
+  nextDueDate: BigInt! # uint256
+  principalDue: BigInt! # uint256
+  unbilledPrincipal: BigInt! # uint256
+  principalDuePaid: BigInt! # uint256
+  unbilledPrincipalPaid: BigInt! # uint256
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PrincipalPaymentMadeWithReceivable @entity(immutable: true) {
+  id: Bytes!
+  borrower: Bytes! # address
+  receivableId: BigInt! # uint256
+  amount: BigInt! # uint256
+  by: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ReceivableBackedCreditLineUpgraded @entity(immutable: true) {
+  id: Bytes!
+  implementation: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
