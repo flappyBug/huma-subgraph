@@ -1,0 +1,8 @@
+{
+  "celo": {
+    "TrancheVault": {
+      "address": "0xf26A071833032Ce57769fdf530E81A28f15671df",
+      "startBlock": 24781411
+    }
+  }
+}
