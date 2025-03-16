@@ -5,12 +5,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: TrancheVault
+    name: JuniorTrancheVault
     network: celo
     source:
-      address: "0xf26A071833032Ce57769fdf530E81A28f15671df"
+      address: "0xaB5Ee8465c8C8d51e2cCc7d52AC53c19AF201Fa4"
       abi: TrancheVault
-      startBlock: 24781411
+      startBlock: 24782120
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -22,15 +22,36 @@ dataSources:
           file: ./abis/TrancheVault.json
       eventHandlers:
         - event: LiquidityDeposited(indexed address,uint256,uint256)
-          handler: handleLiquidityDeposited
+          handler: handleJuniorLiquidityDeposited
+      file: ./src/tranche-vault.ts
+
+  - kind: ethereum
+    name: SeniorTrancheVault
+    network: celo
+    source:
+      address: "0xc21a5485021C904Ed00b22BF774435a5B33c69bc"
+      abi: TrancheVault
+      startBlock: 24782120
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.9
+      language: wasm/assemblyscript
+      entities:
+        - LiquidityDeposited
+      abis:
+        - name: TrancheVault
+          file: ./abis/TrancheVault.json
+      eventHandlers:
+        - event: LiquidityDeposited(indexed address,uint256,uint256)
+          handler: handleSeniorLiquidityDeposited
       file: ./src/tranche-vault.ts
   - kind: ethereum
     name: ReceivableBackedCreditLine
     network: celo
     source:
-      address: "0xE265E07F9d18Df940A75CfFfEA51211F4f0C46cC"
+      address: "0x39EaCecFAE2A174Dacd10D10BBD09a6DD2541C18"
       abi: ReceivableBackedCreditLine
-      startBlock: 24781414
+      startBlock: 24782120
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -54,34 +75,9 @@ dataSources:
         - name: ReceivableBackedCreditLine
           file: ./abis/ReceivableBackedCreditLine.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: BeaconUpgraded(indexed address)
-          handler: handleBeaconUpgraded
-        - event: BillRefreshed(indexed bytes32,uint256,uint256,uint256)
-          handler: handleBillRefreshed
-        - event: CreditClosedAfterPayOff(indexed bytes32,address)
-          handler: handleCreditClosedAfterPayOff
         - event: DrawdownMade(indexed address,uint256,uint256)
           handler: handleDrawdownMade
-        - event: DrawdownMadeWithReceivable(indexed address,indexed uint256,uint256,address)
-          handler: handleDrawdownMadeWithReceivable
-        - event: Initialized(uint8)
-          handler: handleInitialized
-        - event: PaymentMade(indexed address,indexed
-            address,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address)
-          handler: handlePaymentMade
-        - event: PaymentMadeWithReceivable(indexed address,indexed uint256,uint256,address)
-          handler: handlePaymentMadeWithReceivable
-        - event: PoolConfigCacheUpdated(indexed address)
-          handler: handlePoolConfigCacheUpdated
-        - event: PoolConfigChanged(indexed address,indexed address)
-          handler: handlePoolConfigChanged
         - event: PrincipalPaymentMade(indexed address,indexed
             address,uint256,uint256,uint256,uint256,uint256,uint256,address)
           handler: handlePrincipalPaymentMade
-        - event: PrincipalPaymentMadeWithReceivable(indexed address,indexed uint256,uint256,address)
-          handler: handlePrincipalPaymentMadeWithReceivable
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
       file: ./src/receivable-backed-credit-line.ts
